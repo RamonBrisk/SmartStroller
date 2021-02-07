@@ -35,6 +35,7 @@ struct ControllerView: View {
                         .scaleEffect(1.5)
                         .frame(width: 50, height: 50, alignment: .center)
                 }
+
                 
                 
                 HStack {
@@ -47,18 +48,52 @@ struct ControllerView: View {
                                 axis: (x: 0.0, y: 1.0, z: 0.0) )
                             .scaledToFit()
                             .colorInvert()
+                            .overlay(
+                                GeometryReader{ geometry in
+                                        
+                                Circle()
+                                    .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: 18)
+                                    .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? 1 : 0.1)
+                                    .frame(width: geometry.size.width/8, height: geometry.size.width/8, alignment: .center)
+                                    .offset(x: geometry.size.width/4.0, y: geometry.size.height/1.3)
+                                    //除数加左减右，加上减下
+                                
+                                }
+                                
+                            )
+                            .overlay(
+                                GeometryReader{ geometry in
+                                Circle()
+                                    .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: geometry.size.width/18)
+                                    .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? 1 : 0.1)
+                                    .frame(width: geometry.size.width/8, height: geometry.size.width/8, alignment: .center)
+                                    .offset(x: geometry.size.width/1.715, y: geometry.size.height/1.335)
+                                //除数加左减右，加上减下
+                                }
+                                
+                                
+                            )
+                               
+                            
                         
-                        Circle()
-                            .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: 18)
-                            .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? 1 : 0.1)
-                            .frame(width: 30, height: 30, alignment: .center)
-                            .offset(x: -43, y: 77)
                         
-                        Circle()
-                            .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: 18)
-                            .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? 1 : 0.1)
-                            .frame(width: 30, height: 30, alignment: .center)
-                            .offset(x: 34, y: 72)
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                     }
                     
@@ -141,6 +176,8 @@ struct ControllerView: View {
 struct ControllerView_Previews: PreviewProvider {
     static var previews: some View {
         ControllerView()
+            
+            
             
         
         
