@@ -15,7 +15,11 @@ struct ControllerView: View {
         case Fourwheeldrive
         var id: String { self.rawValue }
     }
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     @State var isControllable = false
+    @State var showMonitors = false
     @State var barState = CGSize.zero
     @State var selecteddrive = WheelDrive.Fourwheeldrive
     
@@ -26,7 +30,7 @@ struct ControllerView: View {
                 Image("clothes")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 375, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: 375, height: 100, alignment: .center)
                 HStack {
                     Spacer()
                     Image("babyTV")
@@ -34,6 +38,9 @@ struct ControllerView: View {
                         .scaledToFill()
                         .scaleEffect(1.5)
                         .frame(width: 50, height: 50, alignment: .center)
+                        .onTapGesture {
+                            showMonitors = true
+                        }
                 }
 
                 
@@ -73,27 +80,7 @@ struct ControllerView: View {
                                 
                                 
                             )
-                               
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
                         
                     }
                     
@@ -166,7 +153,25 @@ struct ControllerView: View {
                     }
                 }
             }
-            .padding(.bottom)
+            .padding([.leading, .bottom, .trailing])
+            .blur(radius: showMonitors ? 5 : 0 )
+            
+            
+            
+            MonitorView(showMonitors: $showMonitors)
+                .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                .offset(x: 0, y: showMonitors ? 0 : 1000)
+                
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
         .animation(.easeInOut)
         .ignoresSafeArea(.all, edges: .all)
