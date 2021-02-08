@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627BD0825D03E3C00E0B4DC /* MonitorView.swift */; };
+		B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B627BD0D25D0E91400E0B4DC /* SwiftUICharts */; };
 		B6409E5D25CEA69700B257EC /* SmartStrollerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */; };
 		B6409E5F25CEA69700B257EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E5E25CEA69700B257EC /* ContentView.swift */; };
 		B6409E6125CEA69A00B257EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6025CEA69A00B257EC /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,10 +61,10 @@
 				B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */,
 				B6409E5E25CEA69700B257EC /* ContentView.swift */,
 				B6409E6D25CEA90800B257EC /* ControllerView.swift */,
+				B627BD0825D03E3C00E0B4DC /* MonitorView.swift */,
 				B6409E6025CEA69A00B257EC /* Assets.xcassets */,
 				B6409E6525CEA69A00B257EC /* Info.plist */,
 				B6409E6225CEA69A00B257EC /* Preview Content */,
-				B627BD0825D03E3C00E0B4DC /* MonitorView.swift */,
 			);
 			path = SmartStroller;
 			sourceTree = "<group>";
@@ -91,6 +93,9 @@
 			dependencies = (
 			);
 			name = SmartStroller;
+			packageProductDependencies = (
+				B627BD0D25D0E91400E0B4DC /* SwiftUICharts */,
+			);
 			productName = SmartStroller;
 			productReference = B6409E5925CEA69700B257EC /* SmartStroller.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +123,9 @@
 				Base,
 			);
 			mainGroup = B6409E5025CEA69700B257EC;
+			packageReferences = (
+				B627BD0C25D0E91400E0B4DC /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = B6409E5A25CEA69700B257EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -336,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B627BD0C25D0E91400E0B4DC /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B627BD0D25D0E91400E0B4DC /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B627BD0C25D0E91400E0B4DC /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6409E5125CEA69700B257EC /* Project object */;
 }
