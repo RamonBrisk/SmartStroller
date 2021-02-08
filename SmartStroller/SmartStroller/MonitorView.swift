@@ -49,8 +49,8 @@ struct MonitorView: View {
                     .frame(height:380)
             
             HStack {
-                LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary")
-                LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary")
+                LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "温度", legend: "温度记录")
+                LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "适度记录")
             }
             
             
