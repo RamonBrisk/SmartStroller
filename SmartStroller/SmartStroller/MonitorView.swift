@@ -11,7 +11,7 @@ import SwiftUICharts
 struct MonitorView: View {
     
     @Binding var showMonitors:Bool
-    
+    @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
             

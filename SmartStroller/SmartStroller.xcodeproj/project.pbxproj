@@ -14,6 +14,8 @@
 		B6409E6125CEA69A00B257EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6025CEA69A00B257EC /* Assets.xcassets */; };
 		B6409E6425CEA69A00B257EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */; };
 		B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E6D25CEA90800B257EC /* ControllerView.swift */; };
+		B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */; };
+		B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CF25D12707001D66CC /* DataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B6409E6525CEA69A00B257EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6409E6D25CEA90800B257EC /* ControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
+		B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
+		B6DFC6CF25D12707001D66CC /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */,
 				B6409E5E25CEA69700B257EC /* ContentView.swift */,
+				B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */,
+				B6DFC6CF25D12707001D66CC /* DataStore.swift */,
 				B6409E6D25CEA90800B257EC /* ControllerView.swift */,
 				B627BD0825D03E3C00E0B4DC /* MonitorView.swift */,
 				B6409E6025CEA69A00B257EC /* Assets.xcassets */,
@@ -153,6 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6409E5F25CEA69700B257EC /* ContentView.swift in Sources */,
+				B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */,
+				B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */,
 				B6409E5D25CEA69700B257EC /* SmartStrollerApp.swift in Sources */,
 				B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */,
 				B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */,

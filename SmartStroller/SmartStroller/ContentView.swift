@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+var myBluetooth = Bluetooth()
+
 struct ContentView: View {
     var body: some View {
         ControllerView()

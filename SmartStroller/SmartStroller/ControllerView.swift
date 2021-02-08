@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 struct ControllerView: View {
     
@@ -15,17 +16,24 @@ struct ControllerView: View {
         case Fourwheeldrive
         var id: String { self.rawValue }
     }
+    @ObservedObject var centralManager = myBluetooth
     
     @Environment(\.colorScheme) var colorScheme
-    
-    @State var isControllable = false
     @State var showMonitors = false
     @State var barState = CGSize.zero
     @State var selecteddrive = WheelDrive.Fourwheeldrive
     
+    @State var commandUIsSent = false
+    @State var commandDIsSent = false
+    @State  var commandLIsSent = false
+    @State var commandRIsSent = false
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)).opacity(0.4), Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))]), startPoint: .leading, endPoint: .trailing)
+                .onAppear{
+                    myBluetooth.centralManager = CBCentralManager(delegate: myBluetooth, queue: nil)
+                }
             VStack {
                 Image("clothes")
                     .resizable()
@@ -100,6 +108,24 @@ struct ControllerView: View {
                     .frame(width: 120, height: 180, alignment: .center)
                     .background(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.1))
                     .cornerRadius(30)
+                    .gesture( DragGesture()
+                                .onChanged{ value  in
+                                    if centralManager.isControllable{
+                                        switch selecteddrive {
+                                        case .frontdrive :
+                                            centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                        case .reardrive:
+                                            centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                        case .Fourwheeldrive:
+                                            centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                        }
+                                    }
+                                }
+                    )
+                    
+                    
+                    
+                    
                 }
                 .padding(.trailing)
                 .background( LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)).opacity(0.7), Color(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
@@ -127,29 +153,82 @@ struct ControllerView: View {
                         
                         
                         
-                        Image(systemName: isControllable ? "location.circle" : "location.slash")
+                        Image(systemName: centralManager.isControllable ? "location.circle" : "location.slash")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 100, height: 100, alignment: .center)
                             .font(.system(size: 80))
-                            .foregroundColor(Color(isControllable ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
+                            .foregroundColor(Color(centralManager.isControllable ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
                             .padding()
                             .animation(.spring())
                             .offset(x: barState.width, y: barState.height)
-                            .onTapGesture {
-                                isControllable.toggle()
-                            }
-                            .gesture(DragGesture()
-                                        .onChanged(){
-                                            value  in
-                                            self.barState = value.translation
-                                            
+                            .gesture(
+                                DragGesture()
+                                    .onChanged{ value  in
+                                        barState = value.translation
+                                        
+                                        //                                    print(value.translation)
+                                        
+                                        
+                                        switch value.translation.width {
+                                        case 40 ... 200:
+                                            print("右转\(value.translation.width)")
+                                            if centralManager.isControllable, commandRIsSent == false {
+                                                centralManager.carPeripheral.writeValue(Data([0xDD]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                                commandRIsSent = true
+                                                commandLIsSent = false
+                                            }
+                                        case -200  ...  -40:
+                                            print("左转\(value.translation.width)")
+                                            if centralManager.isControllable, commandLIsSent == false {
+                                                centralManager.carPeripheral.writeValue(Data([0xCC]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                                commandLIsSent = true
+                                                commandRIsSent = false
+                                            }
+                                        default:
+                                            print("default")
                                         }
-                                        .onEnded(){
-                                            _ in
+                                        
+                                        switch value.translation.height {
+                                        case 40 ... 200:
+                                            print("后退\(value.translation.height)")
+                                            if centralManager.isControllable, commandDIsSent == false {
+                                                centralManager.carPeripheral.writeValue(Data([0xBB]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                                commandDIsSent = true
+                                                commandUIsSent = false
+                                            }
+                                        case -200  ...  -40:
+                                            print("前进\(value.translation.height)")
+                                            if centralManager.isControllable, commandUIsSent == false {
+                                                centralManager.carPeripheral.writeValue(Data([0xAA]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                                commandUIsSent = true
+                                                commandDIsSent = false
+                                            }
                                             
-                                            barState = .zero
-                                        })
+                                        default:
+                                            print("default")
+                                        }
+                                        
+                                    }
+                                    .onEnded(){_ in
+                                        
+                                        barState = .zero
+                                        if centralManager.isControllable{
+                                            //01 动力停止
+                                            centralManager.carPeripheral.writeValue(Data([0x01]), for:  centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                            commandUIsSent = false
+                                            commandDIsSent = false
+                                            centralManager.carPeripheral.writeValue(Data([0x02]), for:  centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                            commandLIsSent = false
+                                            commandRIsSent = false
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                    }
+                                
+                            )
                     }
                 }
             }
