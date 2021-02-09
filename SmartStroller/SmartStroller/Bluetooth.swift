@@ -146,17 +146,22 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
         var objectArray = [UInt8](repeating: 0, count: 4)
         var airQualityArray = [UInt8](repeating: 0, count: 4)
         var soundArray = [UInt8](repeating: 0, count: 4)
+        var longitudeArray = [UInt8](repeating: 0, count: 4)
+        var latitudeArray = [UInt8](repeating: 0, count: 4)
+        var altitudeArray = [UInt8](repeating: 0, count: 4)
+        var speedArray = [UInt8](repeating: 0, count: 4)
+        var sateliteArray = [UInt8](repeating: 0, count: 4)
         
         
         if byteArray.count == 20{
             
-            
+            //解析出包数据头
             for i in 0...3 {
                 packageArray[i] = byteArray[i]
             }
             
             
-            
+           // 判断是第一包数据
             if packageArray[0] == 0
             
             {
@@ -179,11 +184,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                 for i in 16...19 {
                     objectArray[i-16] = byteArray[i]
                 }
-                
-                
-                
-                
-                
+
                 
                 let pressureu32 = pressureArray.reversed().reduce(0) { soFar, byte in
                     return soFar << 8 | UInt32(byte)
@@ -208,7 +209,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
 
                 
             }
-            
+            //判断是第二包数据
             if packageArray[0] == 1 {
                 
                 
@@ -216,17 +217,31 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                     airQualityArray[i-4] = byteArray[i]
                 }
                 
-                
                 for i in 8...11 {
                     soundArray[i-8] = byteArray[i]
                 }
-
                 
+                for i in 12...15 {
+                    longitudeArray[i-12] = byteArray[i]
+                }
+                
+                for i in 16...19 {
+                    latitudeArray[i-16] = byteArray[i]
+                }
+
                 let airQuality32 = airQualityArray.reversed().reduce(0) { soFar, byte in
                     return soFar << 8 | UInt32(byte)
                 }
                 
                 let sound32 = soundArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+                
+                let longitude32 = airQualityArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+                
+                let latitude32 = soundArray.reversed().reduce(0) { soFar, byte in
                     return soFar << 8 | UInt32(byte)
                 }
                 
@@ -239,7 +254,55 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                     DataStore.sensorData[5] = 1
                 }
                 
+                DataStore.sensorData[6] = Double(longitude32/1000000)
+                DataStore.sensorData[7] = Double(latitude32/1000000)
             }
+            
+            
+            //判断是第二包数据
+            if packageArray[0] == 1 {
+                
+                for i in 4...7 {
+                    altitudeArray[i-4] = byteArray[i]
+                }
+                
+                for i in 8...11 {
+                    speedArray[i-8] = byteArray[i]
+                }
+                for i in 8...11 {
+                    sateliteArray[i-8] = byteArray[i]
+                }
+                
+                
+                
+                let altitude32 = soundArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+                
+                let speed32 = airQualityArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+                
+                let satelite32 = soundArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+                
+                DataStore.sensorData[8] = Double(altitude32/100)
+                DataStore.sensorData[9] = Double(speed32/100)
+                DataStore.sensorData[9] = Double(satelite32)
+                
+                
+                
+                
+                
+                
+            }
+                
+                
+            
+            
+            
+            
             
             
             

@@ -113,9 +113,9 @@ struct ControllerView: View {
                                     if centralManager.isControllable{
                                         switch selecteddrive {
                                         case .frontdrive :
-                                            centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                                        case .reardrive:
                                             centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                        case .reardrive:
+                                            centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
                                         case .Fourwheeldrive:
                                             centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
                                         }
