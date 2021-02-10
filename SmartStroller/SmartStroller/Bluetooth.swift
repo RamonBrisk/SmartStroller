@@ -101,15 +101,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
             print(characteristic)
             carCharacteristic = characteristic
             peripheral.discoverDescriptors(for: characteristic)
-            
-            
-            
-            
-            
-            //            if characteristic.properties.contains(.read) {
-            //                print("\(characteristic.uuid): properties contains .read")
-            //                peripheral.readValue(for: characteristic)
-            //            }
+        
             if characteristic.properties.contains(.notify) {
                 print("\(characteristic.uuid): properties contains .notify")
                 peripheral.setNotifyValue(true, for: characteristic)
@@ -136,7 +128,6 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
         
         guard let characteristicData = characteristic.value else { return }
         let byteArray = [UInt8](characteristicData)
-        print(byteArray)
         
         
         var packageArray = [UInt8](repeating: 0, count: 4)
@@ -244,13 +235,9 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                 let latitude32 = latitudeArray.reversed().reduce(0) { soFar, byte in
                     return soFar << 8 | UInt32(byte)
                 }
-                
-                
+           
                 DataStore.sensorData[4] = Float(bitPattern: airQuality32)
-                
-                
                 DataStore.sensorData[5] = Float(bitPattern: sound32)
-                
                 DataStore.sensorData[6] = Float(bitPattern: longitude32)
                 DataStore.sensorData[7] = Float(bitPattern: latitude32)
                 
@@ -267,8 +254,8 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                 for i in 8...11 {
                     speedArray[i-8] = byteArray[i]
                 }
-                for i in 8...11 {
-                    sateliteArray[i-8] = byteArray[i]
+                for i in 12...15 {
+                    sateliteArray[i-12] = byteArray[i]
                 }
                 
                 
@@ -287,25 +274,13 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                 
                 DataStore.sensorData[8] = Float(bitPattern: altitude32)
                 DataStore.sensorData[9] = Float(bitPattern: speed32)
-                DataStore.sensorData[9] = Float(bitPattern: satelite32)
+                DataStore.sensorData[10] = Float(Int(satelite32))
+                
                 
                 for i in 0...10 {
                     print(DataStore.sensorData[i])
                 }
-                
-                
-                
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
         
         
