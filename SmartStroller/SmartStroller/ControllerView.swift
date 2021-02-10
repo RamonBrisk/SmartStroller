@@ -188,7 +188,7 @@ struct ControllerView: View {
                     
                     Spacer()
                     
-                    Picker(selection: $selecteddrive, label: Text("WheelDrive")) {
+                    Picker(selection: Binding(get: {selecteddrive}, set: {selecteddrive = $0}), label: Text("WheelDrive")) {
                         Text("前驱").tag(WheelDrive.frontdrive)
                             .foregroundColor(.white)
                         Text("后驱").tag(WheelDrive.reardrive)
@@ -201,22 +201,6 @@ struct ControllerView: View {
                     .frame(width: 60, height: 180, alignment: .center)
                     .background(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.1))
                     .cornerRadius(30)
-                    .gesture( DragGesture()
-                                .onChanged{ value  in
-                                    if centralManager.isControllable{
-                                        switch selecteddrive {
-                                        case .frontdrive :
-                                            centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                                        case .reardrive:
-                                            centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                                        case .Fourwheeldrive:
-                                            centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                                        case .Neutral:
-                                            print("滑行")
-                                        }
-                                    }
-                                }
-                    )
                     
                     
                     
