@@ -8,6 +8,7 @@
 import SwiftUI
 
 var myBluetooth = Bluetooth()
+let screenBounds:CGRect = UIScreen.main.bounds
 
 struct ContentView: View {
     var body: some View {

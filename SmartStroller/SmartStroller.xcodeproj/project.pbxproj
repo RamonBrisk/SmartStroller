@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B60F63F325D3CDFB001B75D0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F63F225D3CDFB001B75D0 /* MapView.swift */; };
 		B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627BD0825D03E3C00E0B4DC /* MonitorView.swift */; };
 		B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B627BD0D25D0E91400E0B4DC /* SwiftUICharts */; };
 		B6409E5D25CEA69700B257EC /* SmartStrollerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B60F63F225D3CDFB001B75D0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B627BD0825D03E3C00E0B4DC /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
 		B6409E5925CEA69700B257EC /* SmartStroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartStroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartStrollerApp.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				B6DFC6CF25D12707001D66CC /* DataStore.swift */,
 				B6409E6D25CEA90800B257EC /* ControllerView.swift */,
 				B627BD0825D03E3C00E0B4DC /* MonitorView.swift */,
+				B60F63F225D3CDFB001B75D0 /* MapView.swift */,
 				B6409E6025CEA69A00B257EC /* Assets.xcassets */,
 				B6409E6525CEA69A00B257EC /* Info.plist */,
 				B6409E6225CEA69A00B257EC /* Preview Content */,
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B60F63F325D3CDFB001B75D0 /* MapView.swift in Sources */,
 				B6409E5F25CEA69700B257EC /* ContentView.swift in Sources */,
 				B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */,
 				B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */,

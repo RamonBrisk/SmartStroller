@@ -14,15 +14,29 @@ struct ControllerView: View {
         case frontdrive
         case reardrive
         case Fourwheeldrive
+        case Neutral
         var id: String { self.rawValue }
     }
     @ObservedObject var centralManager = myBluetooth
     
     @Environment(\.colorScheme) var colorScheme
     @State var showMonitors = false
+    @State var showMap = false
     @State var barState = CGSize.zero
-    @State var selecteddrive = WheelDrive.Fourwheeldrive
+    @State var selecteddrive = WheelDrive.Fourwheeldrive {
+        
+        willSet(newValue){
+            print("new value set")
+        }
+        
+        
+    }
     
+    
+    
+    
+    @State var frontWheel = true
+    @State var rearWheel = true
     @State var commandUIsSent = false
     @State var commandDIsSent = false
     @State  var commandLIsSent = false
@@ -40,6 +54,13 @@ struct ControllerView: View {
                     .scaledToFill()
                     .frame(width: 375, height: 100, alignment: .center)
                 HStack {
+                    
+                    Image(systemName: "mappin.and.ellipse")
+                        .font(.system(size: 40))
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            showMap = true
+                        }
                     Spacer()
                     Image("babyTV")
                         .resizable()
@@ -50,12 +71,12 @@ struct ControllerView: View {
                             showMonitors = true
                         }
                 }
+                .padding(.horizontal)
 
                 
                 
                 HStack {
                     
-                    ZStack {
                         Image("stroller1")
                             .resizable()
                             .rotation3DEffect(
@@ -66,31 +87,109 @@ struct ControllerView: View {
                             .overlay(
                                 GeometryReader{ geometry in
                                         
-                                Circle()
-                                    .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: 18)
-                                    .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? 1 : 0.1)
-                                    .frame(width: geometry.size.width/8, height: geometry.size.width/8, alignment: .center)
-                                    .offset(x: geometry.size.width/4.0, y: geometry.size.height/1.3)
-                                    //除数加左减右，加上减下
-                                
-                                }
-                                
-                            )
-                            .overlay(
-                                GeometryReader{ geometry in
-                                Circle()
-                                    .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: geometry.size.width/18)
-                                    .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? 1 : 0.1)
-                                    .frame(width: geometry.size.width/8, height: geometry.size.width/8, alignment: .center)
-                                    .offset(x: geometry.size.width/1.715, y: geometry.size.height/1.335)
-                                //除数加左减右，加上减下
-                                }
-                                
-                                
-                            )
+                                    ZStack{
+                                        
+                                        Image(systemName: "arrow.counterclockwise.circle")
+                                            .font(.system(size: 60))
+                                            .frame(width: geometry.size.width/5, height: geometry.size.width/5, alignment: .center)
+                                            .background(Color.red)
+                                            .cornerRadius(50)
+                                            .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? 1 : 0.1)
+                                            
+                                        
+                                            
+                                            
+                                            .offset(x: geometry.size.width/1.83, y: geometry.size.height/1.405)
+                                            //除数加左减右，加上减下
+                                        
+                                        
+                                        
+                                        
+//
+//
+//
+//                                        Circle()
+//        //
+//                                            .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: geometry.size.width/13)
+//
+//                                            .frame(width: geometry.size.width/5, height: geometry.size.width/5, alignment: .center)
+//                                            .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.reardrive.rawValue ? 1 : 0.1)
+//
+//                                            .offset(x: geometry.size.width/1.83, y: geometry.size.height/1.405)
+//                                            //除数加左减右，加上减下
+//
+//                                            .onTapGesture {
+//                                                print("click rear Wheel")
+//                                                rearWheel.toggle()
+//                                                if frontWheel && rearWheel {
+//                                                    selecteddrive = WheelDrive.Fourwheeldrive
+//                                                }
+//                                                if frontWheel && !rearWheel {
+//                                                    selecteddrive = WheelDrive.frontdrive
+//                                                }
+//                                                if !frontWheel && rearWheel {
+//                                                    selecteddrive = WheelDrive.reardrive
+//                                                }
+//                                                if !frontWheel && !rearWheel {
+//                                                    selecteddrive = WheelDrive.Neutral
+//                                                }
+//                                            }
+//
+                                        
+                                        
+                                        Circle()
+                                        .stroke(Color(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) : #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)), lineWidth: 15)
+                                        .opacity(selecteddrive.rawValue == WheelDrive.Fourwheeldrive.rawValue ? 1 : selecteddrive.rawValue == WheelDrive.frontdrive.rawValue ? 1 : 0.1)
+                                        .frame(width: geometry.size.width/8, height: geometry.size.width/8, alignment: .center)
+                                        .offset(x: geometry.size.width/4.7, y: geometry.size.height/1.364)
+                                        //除数加左减右，加上减下
+                                        .onTapGesture {
+                                            frontWheel.toggle()
+                                            
+                                            print("click front Wheel")
+                                            
+                                            if frontWheel && rearWheel {
+                                                selecteddrive = WheelDrive.Fourwheeldrive
+                                            }
+                                            if frontWheel && !rearWheel {
+                                                selecteddrive = WheelDrive.frontdrive
+                                            }
+                                            if !frontWheel && rearWheel {
+                                                selecteddrive = WheelDrive.reardrive
+                                            }
+                                            if !frontWheel && !rearWheel {
+                                                selecteddrive = WheelDrive.Neutral
+                                            }
+                                            
+                                    }
+                                        
+                                        
+                                        
+                                        
+                                        
 
-                        
-                    }
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                
+                                }
+                                
+                            )
+//                            .overlay(
+//                                GeometryReader{ geometry in
+//
+//
+//
+//
+//
+//                                }
+//
+//
+//                            )
+
                     
                     
                     Picker(selection: $selecteddrive, label: Text("WheelDrive")) {
@@ -104,8 +203,10 @@ struct ControllerView: View {
                         
                         Text("四驱").tag(WheelDrive.Fourwheeldrive)
                             .foregroundColor(.white)
+                        Text("滑行").tag(WheelDrive.Neutral)
+                            .foregroundColor(.white)
                     }
-                    .frame(width: 120, height: 180, alignment: .center)
+                    .frame(width: 60, height: 180, alignment: .center)
                     .background(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.1))
                     .cornerRadius(30)
                     .gesture( DragGesture()
@@ -118,6 +219,8 @@ struct ControllerView: View {
                                             centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
                                         case .Fourwheeldrive:
                                             centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                                        case .Neutral:
+                                            print("滑行")
                                         }
                                     }
                                 }
@@ -127,6 +230,7 @@ struct ControllerView: View {
                     
                     
                 }
+                .frame(maxWidth: .infinity)
                 .padding(.trailing)
                 .background( LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)).opacity(0.7), Color(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(50)
@@ -154,9 +258,6 @@ struct ControllerView: View {
                         
                         
                         Image(systemName: centralManager.isControllable ? "location.circle" : "location.slash")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 100, alignment: .center)
                             .font(.system(size: 80))
                             .foregroundColor(Color(centralManager.isControllable ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
                             .padding()
@@ -241,14 +342,10 @@ struct ControllerView: View {
                 .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                 .offset(x: 0, y: showMonitors ? 0 : 1000)
                 
-                
+            MapView(showMap: $showMap)
+                .offset(x: showMap ? 0 : 1000, y: 0)
             
-            
-            
-            
-            
-            
-            
+
             
             
         }
@@ -260,6 +357,9 @@ struct ControllerView: View {
 struct ControllerView_Previews: PreviewProvider {
     static var previews: some View {
         ControllerView()
+            
+            
+            
             
             
             
