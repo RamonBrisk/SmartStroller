@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreBluetooth
+import Combine
 
 struct ControllerView: View {
     
@@ -17,8 +18,11 @@ struct ControllerView: View {
         case Neutral
         var id: String { self.rawValue }
     }
-    @ObservedObject var centralManager = myBluetooth
     
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @ObservedObject var centralManager = myBluetooth
+    @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
     @Environment(\.colorScheme) var colorScheme
     @State var showMonitors = false
     @State var showMap = false
@@ -69,6 +73,20 @@ struct ControllerView: View {
                 .onAppear{
                     myBluetooth.centralManager = CBCentralManager(delegate: myBluetooth, queue: nil)
                 }
+            
+                .onReceive(timer, perform: { time in
+                    DataStore.pressurePair .append(("\(time)",DataStore.sensorData[0]))
+                    
+                    print(DataStore.pressurePair)
+                })
+            
+            
+            
+            
+            
+            
+            
+            
             VStack {
                 Image("clothes")
                     .resizable()

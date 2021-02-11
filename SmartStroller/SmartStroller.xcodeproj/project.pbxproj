@@ -15,6 +15,7 @@
 		B6409E6125CEA69A00B257EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6025CEA69A00B257EC /* Assets.xcassets */; };
 		B6409E6425CEA69A00B257EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */; };
 		B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E6D25CEA90800B257EC /* ControllerView.swift */; };
+		B6CB231D25D5503300C2CCB9 /* Progress-Bar in Frameworks */ = {isa = PBXBuildFile; productRef = B6CB231C25D5503300C2CCB9 /* Progress-Bar */; };
 		B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */; };
 		B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CF25D12707001D66CC /* DataStore.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */,
+				B6CB231D25D5503300C2CCB9 /* Progress-Bar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 			name = SmartStroller;
 			packageProductDependencies = (
 				B627BD0D25D0E91400E0B4DC /* SwiftUICharts */,
+				B6CB231C25D5503300C2CCB9 /* Progress-Bar */,
 			);
 			productName = SmartStroller;
 			productReference = B6409E5925CEA69700B257EC /* SmartStroller.app */;
@@ -134,6 +137,7 @@
 			mainGroup = B6409E5025CEA69700B257EC;
 			packageReferences = (
 				B627BD0C25D0E91400E0B4DC /* XCRemoteSwiftPackageReference "ChartView" */,
+				B6CB231B25D5503300C2CCB9 /* XCRemoteSwiftPackageReference "Progress-Bar-SwifttUI" */,
 			);
 			productRefGroup = B6409E5A25CEA69700B257EC /* Products */;
 			projectDirPath = "";
@@ -366,6 +370,14 @@
 				minimumVersion = 1.5.4;
 			};
 		};
+		B6CB231B25D5503300C2CCB9 /* XCRemoteSwiftPackageReference "Progress-Bar-SwifttUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AmeddahAchraf/Progress-Bar-SwifttUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -373,6 +385,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B627BD0C25D0E91400E0B4DC /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		B6CB231C25D5503300C2CCB9 /* Progress-Bar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6CB231B25D5503300C2CCB9 /* XCRemoteSwiftPackageReference "Progress-Bar-SwifttUI" */;
+			productName = "Progress-Bar";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
