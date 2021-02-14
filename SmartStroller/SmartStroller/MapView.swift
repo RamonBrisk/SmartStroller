@@ -18,7 +18,7 @@ struct MapView: View {
             VStack {
                 MapkitView()
                     .frame(width: screenBounds.width, height: screenBounds.height * 0.5)
-                    .cornerRadius(50)
+                    .clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
                 
                 Spacer()
             }

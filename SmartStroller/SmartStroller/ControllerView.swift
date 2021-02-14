@@ -75,9 +75,24 @@ struct ControllerView: View {
                 }
             
                 .onReceive(timer, perform: { time in
+                    
+                    if centralManager.isControllable{
                     DataStore.pressurePair .append(("\(time)",DataStore.sensorData[0]))
                     
+                    DataStore.pressureData.append(Double(DataStore.sensorData[0]))
+                    
+                    DataStore.airData.append(Double(DataStore.sensorData[4]))
+                    
                     print(DataStore.pressurePair)
+                    print(DataStore.pressurePair.dropFirst())
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
                 })
             
             
