@@ -16,6 +16,7 @@ struct MonitorView: View {
     @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
     @State var dragState = CGSize.zero
     @State var frameHeight:CGFloat = screenBounds.height/1.3
+    @State var showHumChart = false
     
     
     var body: some View {
@@ -29,39 +30,61 @@ struct MonitorView: View {
             
             ScrollView {
                 
-                Image("snowsunset")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: screenBounds.width, height: frameHeight, alignment: .center)
-                    .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
-                    .blur(radius: frameHeight == screenBounds.height/4 ? 3 : 0)
-                    .animation(Animation.easeInOut.delay(0.1))
-                    .offset(y:frameHeight == screenBounds.height/4 ? -80 : 0)
-                    
-                    
-                    .overlay(
+                ZStack {
+                    Image("snowsunset")
+                        .resizable()
+                        .scaledToFill()
                         
-                        VStack {
-                            HStack{
-                                Text("传感器数据")
-                                    .font(.system(size: 40))
-                                    .foregroundColor(.white)
+                        .blur(radius: frameHeight == screenBounds.height/4 ? 3 : 0)
+                        .animation(Animation.easeInOut.delay(0.1))
+                        .offset(y:frameHeight == screenBounds.height/4 ? -80 : 0)
+                        
+                        
+                        .overlay(
+                            
+                            VStack {
+                                HStack{
+                                    Text("传感器数据")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: "multiply.circle.fill")
+                                        .font(.system(size: 50))
+                                        .onTapGesture {
+                                            showMonitors = false
+                                        }
+                                }
+                                .padding(.horizontal, 40.0)
                                 Spacer()
-                                Image(systemName: "multiply.circle.fill")
-                                    .font(.system(size: 50))
-                                    .onTapGesture {
-                                        showMonitors = false
-                                    }
                             }
-                            .padding(.horizontal)
-                            Spacer()
-                        }
-                        .padding(.top)
-                        
-                        
+                            .padding(.top)
                     )
                     
+                    
+                    LazyVStack{
+                    
+                        LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
+                        
+                    }
+                    .padding(.all)
+                    .frame(width: screenBounds.width, height: screenBounds.height)
+                    .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                    .offset(x: showHumChart ? 0 : 500)
+                    
+                    
+                    
+                    
+                    
+                }
+                .frame(width: screenBounds.width, height: frameHeight, alignment: .center)
+                .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
+                
+                
+                    
                 ModuleView(DataStore: DataStore, title:"空气湿度", unit: "%", color: Color(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)), number: 11)
+                    .onTapGesture {
+                        showHumChart.toggle()
+                    }
                 ModuleView(DataStore: DataStore, title:"大气压强", unit: "hPa", color: Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)), number: 0)
                 ModuleView(DataStore: DataStore, title:"压力温度", unit: "°C", color: Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)), number: 1)
                 ModuleView(DataStore: DataStore, title:"环境温度", unit: "°C", color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), number: 2)
@@ -97,6 +120,21 @@ struct MonitorView: View {
                     }
             )
             
+//            LazyVStack{
+//
+//                LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
+//
+//            }
+//            .padding(.all)
+//            .frame(width: screenBounds.width, height: screenBounds.height)
+//            .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+//            .offset(x: showHumChart ? 0 : 500)
+            
+            
+            
+            
+            
+            
             
         }
         .ignoresSafeArea(.all)
@@ -105,95 +143,6 @@ struct MonitorView: View {
         
     }
     
-    
-    
-    
-    
-    //    var body: some View {
-    //        ScrollView(.vertical, showsIndicators: false) {
-    //
-    //            LazyVStack{
-    //
-    //                HStack{
-    //                    Text("传感器数据")
-    //                        .font(.system(size: 40))
-    //                    Spacer()
-    //                    Image(systemName: "multiply.circle.fill")
-    //                        .font(.system(size: 50))
-    //                        .onTapGesture {
-    //                            showMonitors = false
-    //                        }
-    //                }
-    //                .padding(.horizontal)
-    //
-    //
-    //
-    //
-    ////                BarChartView(data: ChartData(values: Array(DataStore.pressurePair.dropFirst(2))), title: "气压数据")
-    //
-    //
-    //
-    //
-    //                LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "气压数据", legend: "过去24小时气压数据")
-    //                    .frame(height:380)
-    //
-    //
-    //
-    //                VStack {
-    //
-    //                    Text("空气湿度")
-    //                        .font(.title)
-    //                        .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)): Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-    //
-    //                    CircularProgress(percentage:  CGFloat(DataStore.sensorData[11]/100),
-    //                                     fontSize: 25,
-    //                                     backgroundColor: colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
-    //                                     fontColor : colorScheme == .light ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)): Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
-    //                                     borderColor1: .blue,
-    //                                     borderColor2: LinearGradient(gradient: Gradient(colors: [.pink, .blue]),startPoint: .top, endPoint: .bottom),
-    //                                     borderWidth: 20
-    //                    )
-    //                    .frame(width: 200, height: 200)
-    //                }
-    //                .padding()
-    //                .background(colorScheme == .light ? Color(#colorLiteral(red: 0.09554057568, green: 0.6370621324, blue: 0.3586583138, alpha: 1)): Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)))
-    //                .cornerRadius(30)
-    //
-    //
-    //
-    //
-    //
-    //
-    //                HStack{
-    //                    BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Sales", legend: "Quarterly")
-    //
-    //                    BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Sales", legend: "Quarterly")
-    //                }
-    //
-    //
-    //                LineView(data: Array(DataStore.airData.dropFirst(2)), title: "空气污染", legend: "空气污染变化")
-    //                    .frame(height:380)
-    //
-    //
-    ////                LineChartView(data: DataStore.airData, title: "空气质量变化")
-    //
-    //
-    //
-    //                LineView(data: [527,589,480,457,600,78,], title: "海拔高度", legend: "过去24小时海拔变化")
-    //                    .frame(height:380)
-    //
-    //                HStack {
-    //                    LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "温度", legend: "温度记录")
-    //                    LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "适度记录")
-    //                }
-    //
-    //
-    //            }
-    //
-    //        }
-    //        .padding(.all)
-    //
-    //    }
 }
 
 struct MonitorView_Previews: PreviewProvider {
