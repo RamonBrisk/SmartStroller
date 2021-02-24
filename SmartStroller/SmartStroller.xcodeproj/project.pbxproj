@@ -15,6 +15,7 @@
 		B6409E6125CEA69A00B257EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6025CEA69A00B257EC /* Assets.xcassets */; };
 		B6409E6425CEA69A00B257EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */; };
 		B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E6D25CEA90800B257EC /* ControllerView.swift */; };
+		B65A465025E698F400C94F35 /* ChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A464F25E698F400C94F35 /* ChartTest.swift */; };
 		B6CB231D25D5503300C2CCB9 /* Progress-Bar in Frameworks */ = {isa = PBXBuildFile; productRef = B6CB231C25D5503300C2CCB9 /* Progress-Bar */; };
 		B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */; };
 		B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CF25D12707001D66CC /* DataStore.swift */; };
@@ -30,6 +31,7 @@
 		B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B6409E6525CEA69A00B257EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6409E6D25CEA90800B257EC /* ControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
+		B65A464F25E698F400C94F35 /* ChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTest.swift; sourceTree = "<group>"; };
 		B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
 		B6DFC6CF25D12707001D66CC /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				B6409E6D25CEA90800B257EC /* ControllerView.swift */,
 				B627BD0825D03E3C00E0B4DC /* MonitorView.swift */,
 				B60F63F225D3CDFB001B75D0 /* MapView.swift */,
+				B65A464F25E698F400C94F35 /* ChartTest.swift */,
 				B6409E6025CEA69A00B257EC /* Assets.xcassets */,
 				B6409E6525CEA69A00B257EC /* Info.plist */,
 				B6409E6225CEA69A00B257EC /* Preview Content */,
@@ -169,6 +172,7 @@
 				B6409E5F25CEA69700B257EC /* ContentView.swift in Sources */,
 				B6DFC6D025D12707001D66CC /* DataStore.swift in Sources */,
 				B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */,
+				B65A465025E698F400C94F35 /* ChartTest.swift in Sources */,
 				B6409E5D25CEA69700B257EC /* SmartStrollerApp.swift in Sources */,
 				B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */,
 				B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */,

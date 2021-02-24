@@ -19,6 +19,7 @@ struct MonitorView: View {
     @State var showHumChart = false
     
     
+    
     var body: some View {
         
         ZStack {
@@ -31,15 +32,12 @@ struct MonitorView: View {
             ScrollView {
                 
                 ZStack {
-                    Image("snowsunset")
+                    Image(showHumChart ? "" : "snowsunset")
                         .resizable()
                         .scaledToFill()
-                        
                         .blur(radius: frameHeight == screenBounds.height/4 ? 3 : 0)
-                        .animation(Animation.easeInOut.delay(0.1))
                         .offset(y:frameHeight == screenBounds.height/4 ? -80 : 0)
-                        
-                        
+                        .animation(Animation.linear.delay(0.1))
                         .overlay(
                             
                             VStack {
@@ -59,17 +57,6 @@ struct MonitorView: View {
                             }
                             .padding(.top)
                     )
-                    
-                    
-                    LazyVStack{
-                    
-                        LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
-                        
-                    }
-                    .padding(.all)
-                    .frame(width: screenBounds.width, height: screenBounds.height)
-                    .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                    .offset(x: showHumChart ? 0 : 500)
                     
                     
                     
@@ -120,23 +107,25 @@ struct MonitorView: View {
                     }
             )
             
-//            LazyVStack{
-//
-//                LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
-//
-//            }
-//            .padding(.all)
-//            .frame(width: screenBounds.width, height: screenBounds.height)
-//            .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-//            .offset(x: showHumChart ? 0 : 500)
-            
-            
-            
-            
-            
-            
             
         }
+        .sheet(isPresented: $showHumChart, content: {
+            
+            ZStack{
+            colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+            LazyVStack{
+            
+                LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
+
+                    
+            }
+            .padding(.all)
+            .offset(y: -200)
+            
+        }
+        })
+        
+        
         .ignoresSafeArea(.all)
         
         
@@ -149,7 +138,6 @@ struct MonitorView_Previews: PreviewProvider {
     static var previews: some View {
         MonitorView(showMonitors: .constant(false))
             .previewDevice("iPhone 8")
-            .preferredColorScheme(.light)
         
     }
 }
