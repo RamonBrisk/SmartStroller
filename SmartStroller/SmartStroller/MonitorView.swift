@@ -9,6 +9,14 @@ import SwiftUI
 import SwiftUICharts
 import Progress_Bar
 
+
+
+enum ActiveSheet {
+    case humidity, pressure, pressureTemp, ambientTemp, objectTemp,airQuality
+}
+
+
+
 struct MonitorView: View {
     
     @Binding var showMonitors:Bool
@@ -17,6 +25,9 @@ struct MonitorView: View {
     @State var dragState = CGSize.zero
     @State var frameHeight:CGFloat = screenBounds.height/1.3
     @State var showHumChart = false
+    @State var showPressureChart = false
+    @State var showSheet = false
+    @State var activeSheet: ActiveSheet = .humidity
     
     
     
@@ -56,7 +67,7 @@ struct MonitorView: View {
                                 Spacer()
                             }
                             .padding(.top)
-                    )
+                        )
                     
                     
                     
@@ -67,19 +78,43 @@ struct MonitorView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
                 
                 
-                    
-                ModuleView(DataStore: DataStore, title:"空气湿度", unit: "%", color: Color(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)), number: 11)
-                    .onTapGesture {
-                        showHumChart.toggle()
-                    }
-                ModuleView(DataStore: DataStore, title:"大气压强", unit: "hPa", color: Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)), number: 0)
-                ModuleView(DataStore: DataStore, title:"压力温度", unit: "°C", color: Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)), number: 1)
-                ModuleView(DataStore: DataStore, title:"环境温度", unit: "°C", color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), number: 2)
-                ModuleView(DataStore: DataStore, title:"物体温度", unit: "°C", color: Color(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)), number: 3)
-                ModuleView(DataStore: DataStore, title:"空气质量", unit: "mV", color: Color(#colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)), number: 4)
-                    
+                VStack{
+                    ModuleView(DataStore: DataStore, title:"空气湿度", unit: "%", color: Color(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)), number: 11)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .humidity
+                        }
+                    ModuleView(DataStore: DataStore, title:"大气压强", unit: "hPa", color: Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)), number: 0)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .pressure
+                        }
+                    ModuleView(DataStore: DataStore, title:"压力温度", unit: "°C", color: Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)), number: 1)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .pressureTemp
+                        }
+                    ModuleView(DataStore: DataStore, title:"环境温度", unit: "°C", color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), number: 2)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .objectTemp
+                        }
+                    ModuleView(DataStore: DataStore, title:"物体温度", unit: "°C", color: Color(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)), number: 3)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .objectTemp
+                        }
+                    ModuleView(DataStore: DataStore, title:"空气质量", unit: "mV", color: Color(#colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)), number: 4)
+                        .onTapGesture {
+                            self.showSheet = true
+                            self.activeSheet = .airQuality
+                        }
+                }
+                .onTapGesture {
+                    showSheet.toggle()
+                }
                 
-
+                
                 
                 
                 
@@ -109,23 +144,79 @@ struct MonitorView: View {
             
             
         }
-        .sheet(isPresented: $showHumChart, content: {
-            
-            ZStack{
+        
+        //        .popover(isPresented: $showHumChart, content: {
+        //            ZStack{
+        //            colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+        //            LazyVStack{
+        //
+        //                LineView(data: Array(DataStore.airData.dropFirst(2)), title: "湿度", legend: "湿度记录")
+        //            }
+        //            .offset(y: -200)
+        //
+        //        }
+        //        })
+        
+        .sheet(isPresented: $showSheet, content: {
+            switch activeSheet {
+            case .humidity :
+                ZStack{
+                    colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                    LazyVStack{
+                        
+                        LineView(data: Array(DataStore.airData.dropFirst(2)), title: "湿度", legend: "湿度记录")
+                    }
+                    .offset(y: -200)
+                }
+ 
+            case .pressure:
+                ZStack{
+                    colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                    LazyVStack{
+                        
+                        LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "压强", legend: "大气压强记录")
+                    }
+                    .offset(y: -200)
+                }
+            case .pressureTemp:
+                ZStack{
+                    colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                    LazyVStack{
+                        
+                        LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "压强", legend: "大气压强记录")
+                    }
+                    .offset(y: -200)
+                }
+            case .ambientTemp:
+                ZStack{
+                colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                LazyVStack{
+                    
+                    LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "温度", legend: "环境温度记录")
+                }
+                .offset(y: -200)
+            }
+            case .objectTemp:
+                ZStack{
             colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             LazyVStack{
-            
-                LineView(data: [8,23,54,32,12,37,7,23,43], title: "湿度", legend: "湿度记录")
-
-                    
+                
+                LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "温度", legend: "物体温度记录")
             }
-            .padding(.all)
             .offset(y: -200)
-            
         }
+            case .airQuality:
+                ZStack{
+        colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+        LazyVStack{
+            
+            LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "空气", legend: "空气质量记录")
+        }
+        .offset(y: -200)
+    }
+            }
         })
-        
-        
+           
         .ignoresSafeArea(.all)
         
         
