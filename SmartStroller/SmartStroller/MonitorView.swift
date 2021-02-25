@@ -164,7 +164,7 @@ struct MonitorView: View {
                     colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                     LazyVStack{
                         
-                        LineView(data: Array(DataStore.airData.dropFirst(2)), title: "湿度", legend: "湿度记录")
+                        LineView(data: Array(DataStore.humidityData.dropFirst(2)), title: "湿度", legend: "湿度记录")
                     }
                     .offset(y: -200)
                 }
@@ -183,7 +183,7 @@ struct MonitorView: View {
                     colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                     LazyVStack{
                         
-                        LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "压强", legend: "大气压强记录")
+                        LineView(data: Array(DataStore.pressureTempData.dropFirst(2)), title: "温度", legend: "压强传感器温度记录")
                     }
                     .offset(y: -200)
                 }
@@ -192,7 +192,7 @@ struct MonitorView: View {
                 colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 LazyVStack{
                     
-                    LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "温度", legend: "环境温度记录")
+                    LineView(data: Array(DataStore.ambientData.dropFirst(2)), title: "温度", legend: "环境温度记录")
                 }
                 .offset(y: -200)
             }
@@ -201,7 +201,7 @@ struct MonitorView: View {
             colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             LazyVStack{
                 
-                LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "温度", legend: "物体温度记录")
+                LineView(data: Array(DataStore.objectData.dropFirst(2)), title: "温度", legend: "物体温度记录")
             }
             .offset(y: -200)
         }
@@ -210,7 +210,7 @@ struct MonitorView: View {
         colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         LazyVStack{
             
-            LineView(data: Array(DataStore.pressureData.dropFirst(2)), title: "空气", legend: "空气质量记录")
+            LineView(data: Array(DataStore.airData.dropFirst(2)), title: "空气", legend: "空气质量记录")
         }
         .offset(y: -200)
     }

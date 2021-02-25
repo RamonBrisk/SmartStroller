@@ -16,12 +16,20 @@ class DataStore: ObservableObject{
     @Published var pressurePair:[(String,Float)]
     @Published var airData:[Double]
     @Published var pressureData:[Double]
+    @Published var humidityData:[Double]
+    @Published var pressureTempData:[Double]
+    @Published var ambientData:[Double]
+    @Published var objectData:[Double]
     init() {
         BluetoothState = ""
         sensorData = [0,0,0,0,0,0,0,0,0,0,0,0]
         pressurePair = [("example",2.6)]
         airData = [0]
         pressureData = [0]
+        humidityData = [0]
+        pressureTempData = [0]
+        ambientData = [0]
+        objectData = [0]
     }
     
 }

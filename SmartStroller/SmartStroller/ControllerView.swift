@@ -73,18 +73,28 @@ struct ControllerView: View {
                 .onAppear{
                     myBluetooth.centralManager = CBCentralManager(delegate: myBluetooth, queue: nil)
                 }
-            
+                
                 .onReceive(timer, perform: { time in
-                    
+                    // MARK: 更新数组
                     if centralManager.isControllable{
-                    DataStore.pressurePair .append(("\(time)",DataStore.sensorData[0]))
-                    
-                    DataStore.pressureData.append(Double(DataStore.sensorData[0]))
-                    
-                    DataStore.airData.append(Double(DataStore.sensorData[4]))
-                    
-                    print(DataStore.pressurePair)
-                    print(DataStore.pressurePair.dropFirst())
+                        DataStore.pressurePair .append(("\(time)",DataStore.sensorData[0]))
+                        //空气湿度
+                        DataStore.humidityData.append(Double(DataStore.sensorData[11]))
+                        //气压
+                        DataStore.pressureData.append(Double(DataStore.sensorData[0]))
+                        //压力温度
+                        DataStore.pressureTempData.append(Double(DataStore.sensorData[1]))
+                        //环境温度
+                        DataStore.ambientData.append(Double(DataStore.sensorData[2]))
+                        //物体温度
+                        DataStore.objectData.append(Double(DataStore.sensorData[3]))
+                        
+                        //空气质量
+                        DataStore.airData.append(Double(DataStore.sensorData[4]))
+                        
+                        
+                        print(DataStore.pressurePair)
+                        print(DataStore.pressurePair.dropFirst())
                         
                         
                         
