@@ -20,6 +20,7 @@ class DataStore: ObservableObject{
     @Published var pressureTempData:[Double]
     @Published var ambientData:[Double]
     @Published var objectData:[Double]
+    @Published var altitudeData:[Double]
     init() {
         BluetoothState = ""
         sensorData = [0,0,0,0,0,0,0,0,0,0,0,0]
@@ -30,6 +31,7 @@ class DataStore: ObservableObject{
         pressureTempData = [0]
         ambientData = [0]
         objectData = [0]
+        altitudeData = [0]
     }
     
 }

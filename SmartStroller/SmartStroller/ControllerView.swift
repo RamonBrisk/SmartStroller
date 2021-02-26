@@ -88,10 +88,10 @@ struct ControllerView: View {
                         DataStore.ambientData.append(Double(DataStore.sensorData[2]))
                         //物体温度
                         DataStore.objectData.append(Double(DataStore.sensorData[3]))
-                        
                         //空气质量
                         DataStore.airData.append(Double(DataStore.sensorData[4]))
-                        
+                        //海拔高度
+                        DataStore.altitudeData.append(Double(DataStore.sensorData[8]))
                         
                         print(DataStore.pressurePair)
                         print(DataStore.pressurePair.dropFirst())
