@@ -32,10 +32,11 @@ struct MapView: View {
                         
                         
                         HStack {
-                            MultiLineChartView(data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title")
-                            VStack {
-                                Text("可见卫星数").font(.title)
+                            LineChartView(data: Array(DataStore.distanceData.dropFirst(DataStore.distanceData.count > 7 ? DataStore.distanceData.count - 5 : 2)), title: "障碍物距离", legend: "曲线")
+                            VStack(spacing: 10) {
+                                Text("可见卫星").font(.title)
                                     .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)): Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)))
+                                Text(String(Int(DataStore.sensorData[10])) + " 颗")
                                 Spacer()
                                 CircularProgress(percentage: CGFloat(DataStore.sensorData[10] / 24) ,
                                                  fontSize: 25,
@@ -46,11 +47,12 @@ struct MapView: View {
                                                  borderWidth: 20
                                 )
                             }
+                            .padding(.horizontal)
+                            .background(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)))
                             .frame(width: 160, height: 240, alignment: .center)
-                            .shadow(radius: 8)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
+                            
                         }
-                        
                         
                         BarChartView(data: ChartData(points: Array(DataStore.altitudeData.dropFirst(2))), title: "高度记录", form: ChartForm.large)
                         Spacer()

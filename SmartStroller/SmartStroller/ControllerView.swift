@@ -93,6 +93,9 @@ struct ControllerView: View {
                         //海拔高度
                         DataStore.altitudeData.append(Double(DataStore.sensorData[8]))
                         
+                        //障碍物距离
+                        DataStore.distanceData.append(Double(DataStore.sensorData[12]))
+                        
                         print(DataStore.pressurePair)
                         print(DataStore.pressurePair.dropFirst())
                         
