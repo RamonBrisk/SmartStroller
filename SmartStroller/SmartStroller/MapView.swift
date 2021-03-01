@@ -32,7 +32,8 @@ struct MapView: View {
                         
                         
                         HStack {
-                            LineChartView(data: Array(DataStore.distanceData.dropFirst(DataStore.distanceData.count > 7 ? DataStore.distanceData.count - 5 : 2)), title: "障碍物距离", legend: "曲线")
+                            LineChartView(data: Array(Array(DataStore.distanceData.dropFirst(2)).dropFirst(
+                                                        Array(DataStore.distanceData.dropFirst(2)).count > 15 ? Array(DataStore.distanceData.dropFirst(2)).count - 15: 0)), title: "障碍物距离", legend: "曲线")
                             VStack(spacing: 10) {
                                 Text("可见卫星").font(.title)
                                     .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)): Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)))
