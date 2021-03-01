@@ -15,16 +15,14 @@ struct MapView: View {
     @Binding var showMap: Bool
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
+    let objectAnnotation = MKPointAnnotation()
     
     var body: some View{
         
         ZStack {
             VStack {
-                MapkitView()
+                MapkitView(objectAnnotation: objectAnnotation)
                     .frame(width: screenBounds.width, height: screenBounds.height * 0.35)
-                //                    .clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
-                
-                
                 ZStack{
                     colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                     LazyVStack{
@@ -63,6 +61,7 @@ struct MapView: View {
                 }
                 
             }
+
             
             VStack {
                 HStack {
@@ -87,34 +86,54 @@ struct MapView: View {
 
 struct MapkitView: UIViewRepresentable {
     
-    //    let location = CLLocationCoordinate2D(latitude: 31.094547, longitude: 104.42346)
     
-    let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 31.094454, longitude: 104.37935), latitudinalMeters: .leastNormalMagnitude, longitudinalMeters: .leastNormalMagnitude)
+    @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
     
+    //创建一个大头针对象
+    let objectAnnotation:MKPointAnnotation
     
+    let map = MKMapView()
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
+        let objectAnnotation = MKPointAnnotation()
+        
+        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(DataStore.sensorData[7]), longitude: CLLocationDegrees(DataStore.sensorData[6])), latitudinalMeters: .leastNormalMagnitude, longitudinalMeters: .leastNormalMagnitude)
+        //设置大头针的显示位置
+        objectAnnotation.coordinate = CLLocation(latitude: CLLocationDegrees(DataStore.sensorData[7]),
+                                                 longitude: CLLocationDegrees(DataStore.sensorData[6])).coordinate
+        //设置点击大头针之后显示的标题
+        objectAnnotation.title = "实时婴儿车位置"
+        //设置点击大头针之后显示的描述
+        objectAnnotation.subtitle = "实时婴儿车位置"
+            
+        map.addAnnotation(objectAnnotation)
+        map.setRegion(region, animated: true)
+        
     }
+    
+    
     
     func makeUIView(context: Context) -> some UIView {
         
         
         
-        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(DataStore.sensorData[7]), longitude: CLLocationDegrees(DataStore.sensorData[6])), latitudinalMeters: .leastNormalMagnitude, longitudinalMeters: .leastNormalMagnitude)
         //创建一个大头针对象
         let objectAnnotation = MKPointAnnotation()
         //设置大头针的显示位置
-        objectAnnotation.coordinate = CLLocation(latitude: 31.094454,
-                                                 longitude: 104.37935).coordinate
+        objectAnnotation.coordinate = CLLocation(latitude: CLLocationDegrees(31.094454),
+                                                 longitude: CLLocationDegrees(104.37935)).coordinate
         //设置点击大头针之后显示的标题
         objectAnnotation.title = "婴儿车位置"
         //设置点击大头针之后显示的描述
         objectAnnotation.subtitle = "婴儿车位置"
+ 
         
         
         
-        let map = MKMapView()
+        
         map.showsUserLocation = true
         map.setRegion(region, animated: true)
         //添加大头针

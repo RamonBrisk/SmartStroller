@@ -240,9 +240,14 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
            
                 DataStore.sensorData[4] = Float(bitPattern: airQuality32)
                 DataStore.sensorData[5] = Float(bitPattern: sound32)
-                DataStore.sensorData[6] = Float(bitPattern: longitude32)
-                DataStore.sensorData[7] = Float(bitPattern: latitude32)
                 
+                if Float(bitPattern: longitude32) != 0 {
+                DataStore.sensorData[6] = Float(bitPattern: longitude32)
+                }
+                
+                if Float(bitPattern: latitude32) != 0 {
+                DataStore.sensorData[7] = Float(bitPattern: latitude32)
+                }
             }
             
             

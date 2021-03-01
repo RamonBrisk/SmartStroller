@@ -358,7 +358,7 @@ struct ControllerView: View {
                 }
             }
             .padding([.leading, .bottom, .trailing])
-            .blur(radius: showMonitors ? 5 : 0 )
+           
             
             
             

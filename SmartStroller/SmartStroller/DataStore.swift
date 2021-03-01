@@ -25,7 +25,8 @@ class DataStore: ObservableObject{
     @Published var distanceData:[Double]
     init() {
         BluetoothState = ""
-        sensorData = [0,0,0,0,      0,0,0,0,   0,0,0,0,   0]
+        sensorData = [0,0,0,0,      0,0,104.37935,31.094454,   0,0,0,0,   0]
+        
         pressurePair = [("example",2.6)]
         airData = [0]
         pressureData = [0]
