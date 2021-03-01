@@ -143,6 +143,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
         var speedArray = [UInt8](repeating: 0, count: 4)
         var sateliteArray = [UInt8](repeating: 0, count: 4)
         var humidityArray = [UInt8](repeating: 0, count: 4)
+        var distanceArray = [UInt8](repeating: 0, count: 4)
         
         
         if byteArray.count == 20{
@@ -286,10 +287,35 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
                 DataStore.sensorData[11] = Float(bitPattern: humidity32)
                 
                 
-                for i in 0...11 {
-                    print(DataStore.sensorData[i])
-                }
+                
             }
+            
+            
+            
+            
+            //判断是第四包数据
+            if packageArray[0] == 3 {
+                
+                for i in 4...7 {
+                    distanceArray[i-4] = byteArray[i]
+                }
+                
+            
+            
+                let distance32 = distanceArray.reversed().reduce(0) { soFar, byte in
+                    return soFar << 8 | UInt32(byte)
+                }
+            
+            
+                DataStore.sensorData[12] = Float(bitPattern: distance32)
+
+            }
+            
+            for i in 0...12 {
+                print(DataStore.sensorData[i])
+            }
+            
+            
         }
         
         
