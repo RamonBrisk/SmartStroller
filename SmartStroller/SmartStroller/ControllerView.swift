@@ -137,9 +137,11 @@ struct ControllerView: View {
                 }
                 .padding(.horizontal)
                 
-                
+                Text("前方距离：" + String(format: "%.2f", DataStore.sensorData[12]) + "cm")
+                    .foregroundColor(.white)
                 
                 HStack {
+
                     
                     Image("stroller1")
                         .resizable()
