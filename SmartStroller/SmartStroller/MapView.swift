@@ -21,7 +21,7 @@ struct MapView: View {
         
         ZStack {
             VStack {
-                MapkitView(objectAnnotation: objectAnnotation)
+                MapkitView()
                     .frame(width: screenBounds.width, height: screenBounds.height * 0.35)
                 ZStack{
                     colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
@@ -53,7 +53,8 @@ struct MapView: View {
                             
                         }
                         
-                        BarChartView(data: ChartData(points: Array(DataStore.altitudeData.dropFirst(2))), title: "高度记录", form: ChartForm.large)
+                        BarChartView(data: ChartData(points: Array(Array(DataStore.altitudeData.dropFirst(2)).dropFirst(
+                                                                    Array(DataStore.altitudeData.dropFirst(2)).count > 15 ? Array(DataStore.altitudeData.dropFirst(2)).count - 15: 0))), title: "高度记录", form: ChartForm.large)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -90,55 +91,46 @@ struct MapkitView: UIViewRepresentable {
     @ObservedObject var DataStore:DataStore = myBluetooth.DataStore
     
     //创建一个大头针对象
-    let objectAnnotation:MKPointAnnotation
+    let objectAnnotation = MKPointAnnotation()
     
-    let map = MKMapView()
     
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+    //手动换成MKMapView
+    func updateUIView(_ uiView: MKMapView, context: Context) {
         
+        
+        uiView.removeAnnotations(uiView.annotations)
+        
+        //创建一个大头针对象
         let objectAnnotation = MKPointAnnotation()
-        
-        
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(DataStore.sensorData[7]), longitude: CLLocationDegrees(DataStore.sensorData[6])), latitudinalMeters: .leastNormalMagnitude, longitudinalMeters: .leastNormalMagnitude)
         //设置大头针的显示位置
         objectAnnotation.coordinate = CLLocation(latitude: CLLocationDegrees(DataStore.sensorData[7]),
                                                  longitude: CLLocationDegrees(DataStore.sensorData[6])).coordinate
+
         //设置点击大头针之后显示的标题
         objectAnnotation.title = "实时婴儿车位置"
+
         //设置点击大头针之后显示的描述
-        objectAnnotation.subtitle = "实时婴儿车位置"
-            
-        map.addAnnotation(objectAnnotation)
-        map.setRegion(region, animated: true)
+        objectAnnotation.subtitle = "实时婴儿车位置详细信息"
+        
+        uiView.addAnnotation(objectAnnotation)
+
+        var aaa = uiView.annotations
+        
+        
+        
+        
         
     }
     
     
-    
-    func makeUIView(context: Context) -> some UIView {
+    //手动换成MKMapView
+    func makeUIView(context: Context) -> MKMapView {
         
+        let map = MKMapView()
         
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(DataStore.sensorData[7]), longitude: CLLocationDegrees(DataStore.sensorData[6])), span: MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0))
         
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(DataStore.sensorData[7]), longitude: CLLocationDegrees(DataStore.sensorData[6])), latitudinalMeters: .leastNormalMagnitude, longitudinalMeters: .leastNormalMagnitude)
-        //创建一个大头针对象
-        let objectAnnotation = MKPointAnnotation()
-        //设置大头针的显示位置
-        objectAnnotation.coordinate = CLLocation(latitude: CLLocationDegrees(31.094454),
-                                                 longitude: CLLocationDegrees(104.37935)).coordinate
-        //设置点击大头针之后显示的标题
-        objectAnnotation.title = "婴儿车位置"
-        //设置点击大头针之后显示的描述
-        objectAnnotation.subtitle = "婴儿车位置"
- 
-        
-        
-        
-        
-        map.showsUserLocation = true
         map.setRegion(region, animated: true)
-        //添加大头针
-        map.addAnnotation(objectAnnotation)
-        // map.addAnnotation(map.userLocation)
         
         return map
         

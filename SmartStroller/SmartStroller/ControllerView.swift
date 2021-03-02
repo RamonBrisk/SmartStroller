@@ -96,8 +96,6 @@ struct ControllerView: View {
                         //障碍物距离
                         DataStore.distanceData.append(Double(DataStore.sensorData[12]))
                         
-                        print(DataStore.pressurePair)
-                        print(DataStore.pressurePair.dropFirst())
                         
                         
                         
