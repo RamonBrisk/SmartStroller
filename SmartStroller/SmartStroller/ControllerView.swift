@@ -32,23 +32,26 @@ struct ControllerView: View {
         willSet(newValue){
             
             
-            if centralManager.isControllable{
-                switch selecteddrive {
-                case .frontdrive :
-                    centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                case .reardrive:
-                    centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                case .Fourwheeldrive:
-                    centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-                case .Neutral:
-                    print("滑行")
-                }
-            }
+            
             
         }
         
         didSet(oldValue){
-            print("did设置完成")
+            if centralManager.isControllable{
+                switch selecteddrive {
+                case .frontdrive :
+                    print("前置驱动")
+                    centralManager.carPeripheral.writeValue(Data([0x03]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                case .reardrive:
+                    print("后置驱动")
+                    centralManager.carPeripheral.writeValue(Data([0x04]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                case .Fourwheeldrive:
+                    print("全驱动")
+                    centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+                case .Neutral:
+                    print("滑行")
+                }
+            }
             
             
             
