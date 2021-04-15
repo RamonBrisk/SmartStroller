@@ -365,10 +365,10 @@ struct ControllerView: View {
             
             MonitorView(showMonitors: $showMonitors)
                 .background(colorScheme == .light ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                .offset(x: 0, y: showMonitors ? 0 : 1000)
+                .offset(x: 0, y: showMonitors ? 0 : 1500)
             
             MapView(showMap: $showMap)
-                .offset(x: showMap ? 0 : 1000, y: 0)
+                .offset(x: showMap ? 0 : 1500, y: 0)
             
             
             
@@ -381,7 +381,11 @@ struct ControllerView: View {
 
 struct ControllerView_Previews: PreviewProvider {
     static var previews: some View {
-        ControllerView()
+        Group {
+            ControllerView()
+            ControllerView()
+                .previewDevice("iPad (8th generation)")
+        }
         
         
         

@@ -42,40 +42,37 @@ struct MonitorView: View {
             
             ScrollView {
                 
-                ZStack {
-                    Image(showHumChart ? "" : "snowsunset")
-                        .resizable()
-                        .scaledToFill()
-                        .blur(radius: frameHeight == screenBounds.height/4 ? 3 : 0)
-                        .offset(y:frameHeight == screenBounds.height/4 ? -80 : 0)
-                        .animation(Animation.linear.delay(0.1))
-                        .overlay(
-                            
-                            VStack {
-                                HStack{
-                                    Text("传感器数据")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.white)
-                                    Spacer()
-                                    Image(systemName: "multiply.circle.fill")
-                                        .font(.system(size: 50))
-                                        .onTapGesture {
-                                            showMonitors = false
-                                        }
+            
+                    
+                    
+                    HStack{
+                            Text("传感器数据")
+                                .font(.system(size: 40))
+                                .foregroundColor(.white)
+                            Spacer()
+                            Image(systemName: "multiply.circle.fill")
+                                .font(.system(size: 50))
+                                .onTapGesture {
+                                    showMonitors = false
                                 }
-                                .padding(.horizontal, 40.0)
-                                Spacer()
-                            }
-                            .padding(.top)
-                        )
+                        }
+                    .padding(.horizontal, 40.0)
                     
                     
+                    VStack {
+                        Image(showHumChart ? "" : "snowsunset")
+                            .resizable()
+                            .scaledToFill()
+                            .blur(radius: frameHeight == screenBounds.height/4 ? 3 : 0)
+                            .offset(y:frameHeight == screenBounds.height/4 ? -80 : 0)
+                            .animation(Animation.linear.delay(0.1))
+                            .frame(width: screenBounds.width, height: frameHeight, alignment: .center)
+                            .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
+                    }
                     
-                    
-                    
-                }
-                .frame(width: screenBounds.width, height: frameHeight, alignment: .center)
-                .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
+
+   
+                
                 
                 
                 VStack{
@@ -234,8 +231,11 @@ struct MonitorView: View {
 
 struct MonitorView_Previews: PreviewProvider {
     static var previews: some View {
-        MonitorView(showMonitors: .constant(false))
-            .previewDevice("iPhone 8")
+        Group {
+            MonitorView(showMonitors: .constant(false))
+            MonitorView(showMonitors: .constant(false))
+                .previewDevice("iPad (8th generation)")
+        }
         
     }
 }
