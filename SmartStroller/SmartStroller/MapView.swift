@@ -22,7 +22,7 @@ struct MapView: View {
         ZStack {
             VStack {
                 MapkitView()
-                    .frame(width: screenBounds.width, height: screenBounds.height * 0.35)
+                    .frame(width: screenBounds.width, height: screenBounds.height * 0.4)
                 ZStack{
                     colorScheme == .light ? Color(#colorLiteral(red: 0.9768705964, green: 0.9613510966, blue: 0.9277829528, alpha: 1)): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                     LazyVStack{
@@ -31,13 +31,19 @@ struct MapView: View {
                         
                         HStack {
                             LineChartView(data: Array(Array(DataStore.distanceData.dropFirst(2)).dropFirst(
-                                                        Array(DataStore.distanceData.dropFirst(2)).count > 15 ? Array(DataStore.distanceData.dropFirst(2)).count - 15: 0)), title: "障碍物距离", legend: "曲线",style: ChartStyle(
-                                                            backgroundColor:  Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
-                                                            accentColor: Colors.OrangeStart,
-                                                            secondGradientColor: Colors.OrangeEnd,
-                                                            textColor: Color.black,
-                                                            legendTextColor: Color.gray,
-                                                            dropShadowColor: Color.gray), dropShadow: false)
+                                                        Array(DataStore.distanceData.dropFirst(2)).count > 15 ? Array(DataStore.distanceData.dropFirst(2)).count - 15: 0)),
+                                          title: "障碍物距离",
+                                          legend: "曲线",
+                                          style: ChartStyle(
+                                            backgroundColor:  Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
+                                            accentColor: Colors.OrangeStart,
+                                            secondGradientColor: Colors.OrangeEnd,
+                                            textColor: Color.black,
+                                            legendTextColor: Color.gray,
+                                            dropShadowColor: Color.gray),
+                                          dropShadow: false
+                                          
+                            )
                             VStack(spacing: 10) {
                                 Text("可见卫星").font(.title).bold()
                                     .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)): Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
@@ -47,27 +53,32 @@ struct MapView: View {
                                 CircularProgress(percentage: CGFloat(DataStore.sensorData[10] / 24) ,
                                                  fontSize: 25,
                                                  backgroundColor: colorScheme == .light ? Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5): Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)),
-                                                 fontColor : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
-                                                 borderColor1: Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
+                                                 fontColor : Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)).opacity(0.5),
+                                                 borderColor1: Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)).opacity(0.5),
                                                  borderColor2: LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)).opacity(0.5), Color(#colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)).opacity(0.5)]),startPoint: .top, endPoint: .bottom),
                                                  borderWidth: 20
                                 )
                             }
+                            .padding(.top, 4)
                             .padding(.horizontal)
                             .frame(width: 160, height: 240, alignment: .center)
-                            .background(Color(#colorLiteral(red: 0.6176869273, green: 0.7954183221, blue: 0.8668126464, alpha: 1)))
+                            .background(colorScheme == .light ? Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5): Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             
                         }
                         
                         BarChartView(data: ChartData(points: Array(Array(DataStore.altitudeData.dropFirst(2)).dropFirst(
-                                                                    Array(DataStore.altitudeData.dropFirst(2)).count > 15 ? Array(DataStore.altitudeData.dropFirst(2)).count - 15: 0))), title: "高度记录", style: ChartStyle(
-                                                                        backgroundColor: Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
-                                                                        accentColor: Colors.OrangeStart,
-                                                                        secondGradientColor: Colors.OrangeEnd,
-                                                                        textColor: Color.black,
-                                                                        legendTextColor: Color.gray,
-                                                                        dropShadowColor: Color.gray), form: ChartForm.large, dropShadow: false)
+                                                                    Array(DataStore.altitudeData.dropFirst(2)).count > 15 ? Array(DataStore.altitudeData.dropFirst(2)).count - 15: 0))),
+                                     title: "高度记录",
+                                     style: ChartStyle(
+                                        backgroundColor: Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.5),
+                                        
+                                        accentColor: Colors.OrangeStart,
+                                        secondGradientColor: Colors.OrangeEnd,
+                                        textColor: Color.black,
+                                        legendTextColor: Color.gray,
+                                        dropShadowColor: Color.gray), form: ChartForm.large,
+                                     dropShadow: false)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -154,7 +165,7 @@ struct MapkitView: UIViewRepresentable {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView(showMap: .constant(true))
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
             .previewDevice("iPad (8th generation)")
     }
 }

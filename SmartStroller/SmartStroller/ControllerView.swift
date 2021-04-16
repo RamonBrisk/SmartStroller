@@ -50,6 +50,7 @@ struct ControllerView: View {
                     centralManager.carPeripheral.writeValue(Data([0x05]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
                 case .Neutral:
                     print("滑行")
+                    centralManager.carPeripheral.writeValue(Data([0x06]), for: centralManager.carCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
                 }
             }
             
