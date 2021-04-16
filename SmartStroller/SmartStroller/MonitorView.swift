@@ -42,24 +42,10 @@ struct MonitorView: View {
             
             ScrollView {
                 
-            
+
                     
-                    
-                    HStack{
-                            Text("传感器数据")
-                                .font(.system(size: 40))
-                                .foregroundColor(.white)
-                            Spacer()
-                            Image(systemName: "multiply.circle.fill")
-                                .font(.system(size: 50))
-                                .onTapGesture {
-                                    showMonitors = false
-                                }
-                        }
-                    .padding(.horizontal, 40.0)
-                    
-                    
-                    VStack {
+                    ZStack {
+                        
                         Image(showHumChart ? "" : "snowsunset")
                             .resizable()
                             .scaledToFill()
@@ -68,6 +54,15 @@ struct MonitorView: View {
                             .animation(Animation.linear.delay(0.1))
                             .frame(width: screenBounds.width, height: frameHeight, alignment: .center)
                             .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
+                //此处导致预览不能点击每个部分
+                        
+                        VStack {
+                            Text("传感器数据")
+                                .font(.system(size: 40))
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding(.top)
                     }
                     
 
@@ -136,11 +131,19 @@ struct MonitorView: View {
                             frameHeight = screenBounds.height/1.3
                         }
                         
+                        if dragState.width > 100 {
+                            showMonitors = false
+                        }
+                        
+                        
+                        
+                        
                     }
             )
             
             
         }
+        .ignoresSafeArea(.all)
         
         //        .popover(isPresented: $showHumChart, content: {
         //            ZStack{
