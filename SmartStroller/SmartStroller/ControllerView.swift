@@ -136,6 +136,9 @@ struct ControllerView: View {
             VStack {
                 Image("clothes")
                     .resizable()
+                    .onTapGesture {
+                        mqttManager.publish(message: "SmartStrollerData", topic: "sss")
+                    }
                     .scaledToFill()
                     .frame(width: 375, height: 100, alignment: .center)
                 HStack {

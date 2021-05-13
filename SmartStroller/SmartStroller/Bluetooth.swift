@@ -327,7 +327,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
             
         }
         
-        
+//        mqttManager.publish(message: "SmartStrollerData", topic: "sss")
         //...more sensor data
         
     }
