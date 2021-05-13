@@ -52,18 +52,22 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(peripheral)
-        if peripheral.name == "HC-08" {
+        if peripheral.name == "MLT-BT05" {
             carPeripheral = peripheral
+            print("赋值peripheral")
             carPeripheral.delegate = self
+            print("设置代理成功")
             central.stopScan()
+            print("停止扫描")
             centralManager.connect(carPeripheral)
+            print("尝试连接")
         }
     }
     
     
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("connected")
+        print("蓝牙连接成功")
         DataStore.BluetoothState = "蓝牙已连接"
         carPeripheral.discoverServices([carServiceCBUUID])
         isControllable = true

@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CocoaMQTT
 
 var myBluetooth = Bluetooth()
+let mqttManager = MqttManager.shared
 let screenBounds:CGRect = UIScreen.main.bounds
 
 struct ContentView: View {
@@ -25,3 +27,7 @@ struct ContentView_Previews: PreviewProvider {
         }
     }
 }
+
+
+
+

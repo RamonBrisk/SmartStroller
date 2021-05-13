@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreBluetooth
 import Combine
+import CocoaMQTT
 
 struct ControllerView: View {
     
@@ -76,6 +77,21 @@ struct ControllerView: View {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)).opacity(0.4), Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))]), startPoint: .leading, endPoint: .trailing)
                 .onAppear{
                     myBluetooth.centralManager = CBCentralManager(delegate: myBluetooth, queue: nil)
+                    
+                    
+                    
+                    mqttManager.connect(host: "183.230.40.39", port: 6002, username: "326628", password: "13281015932", cleanSession: true)
+
+                    
+               
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 
                 .onReceive(timer, perform: { time in
@@ -287,7 +303,6 @@ struct ControllerView: View {
                             .font(.system(size: 80))
                             .foregroundColor(Color(centralManager.isControllable ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
                             .padding()
-                            .animation(.spring())
                             .offset(x: barState.width, y: barState.height)
                             .gesture(
                                 DragGesture()

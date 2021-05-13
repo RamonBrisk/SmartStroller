@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4DDD96503FF8F3F9B2444E6 /* Pods_SmartStroller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6476FEDC0E591E2BFCAAFDC /* Pods_SmartStroller.framework */; };
 		B60F63F325D3CDFB001B75D0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F63F225D3CDFB001B75D0 /* MapView.swift */; };
 		B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627BD0825D03E3C00E0B4DC /* MonitorView.swift */; };
 		B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B627BD0D25D0E91400E0B4DC /* SwiftUICharts */; };
@@ -15,6 +16,9 @@
 		B6409E6125CEA69A00B257EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6025CEA69A00B257EC /* Assets.xcassets */; };
 		B6409E6425CEA69A00B257EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */; };
 		B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6409E6D25CEA90800B257EC /* ControllerView.swift */; };
+		B6436FF1264D555A00BB28FA /* MqttManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6436FEE264D555A00BB28FA /* MqttManagerDelegate.swift */; };
+		B6436FF2264D555A00BB28FA /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6436FEF264D555A00BB28FA /* MulticastDelegate.swift */; };
+		B6436FF3264D555A00BB28FA /* MqttManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6436FF0264D555A00BB28FA /* MqttManager.swift */; };
 		B65A465025E698F400C94F35 /* ChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A464F25E698F400C94F35 /* ChartTest.swift */; };
 		B6CB231D25D5503300C2CCB9 /* Progress-Bar in Frameworks */ = {isa = PBXBuildFile; productRef = B6CB231C25D5503300C2CCB9 /* Progress-Bar */; };
 		B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */; };
@@ -22,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2404ADFC9AF53A5F59482A8A /* Pods-SmartStroller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartStroller.debug.xcconfig"; path = "Target Support Files/Pods-SmartStroller/Pods-SmartStroller.debug.xcconfig"; sourceTree = "<group>"; };
 		B60F63F225D3CDFB001B75D0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B627BD0825D03E3C00E0B4DC /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
 		B6409E5925CEA69700B257EC /* SmartStroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartStroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,9 +36,14 @@
 		B6409E6325CEA69A00B257EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B6409E6525CEA69A00B257EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6409E6D25CEA90800B257EC /* ControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
+		B6436FEE264D555A00BB28FA /* MqttManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MqttManagerDelegate.swift; sourceTree = "<group>"; };
+		B6436FEF264D555A00BB28FA /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		B6436FF0264D555A00BB28FA /* MqttManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MqttManager.swift; sourceTree = "<group>"; };
 		B65A464F25E698F400C94F35 /* ChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTest.swift; sourceTree = "<group>"; };
 		B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
 		B6DFC6CF25D12707001D66CC /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		C2A3E01A4CDD6496935C6411 /* Pods-SmartStroller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartStroller.release.xcconfig"; path = "Target Support Files/Pods-SmartStroller/Pods-SmartStroller.release.xcconfig"; sourceTree = "<group>"; };
+		D6476FEDC0E591E2BFCAAFDC /* Pods_SmartStroller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartStroller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +53,38 @@
 			files = (
 				B627BD0E25D0E91400E0B4DC /* SwiftUICharts in Frameworks */,
 				B6CB231D25D5503300C2CCB9 /* Progress-Bar in Frameworks */,
+				B4DDD96503FF8F3F9B2444E6 /* Pods_SmartStroller.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FF60F46875865FA35FD6DD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6476FEDC0E591E2BFCAAFDC /* Pods_SmartStroller.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		191070EC88938809DD897878 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2404ADFC9AF53A5F59482A8A /* Pods-SmartStroller.debug.xcconfig */,
+				C2A3E01A4CDD6496935C6411 /* Pods-SmartStroller.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		B6409E5025CEA69700B257EC = {
 			isa = PBXGroup;
 			children = (
 				B6409E5B25CEA69700B257EC /* SmartStroller */,
 				B6409E5A25CEA69700B257EC /* Products */,
+				191070EC88938809DD897878 /* Pods */,
+				0FF60F46875865FA35FD6DD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +99,7 @@
 		B6409E5B25CEA69700B257EC /* SmartStroller */ = {
 			isa = PBXGroup;
 			children = (
+				B6436FED264D555A00BB28FA /* MqttManager */,
 				B6409E5C25CEA69700B257EC /* SmartStrollerApp.swift */,
 				B6409E5E25CEA69700B257EC /* ContentView.swift */,
 				B6DFC6CC25D126CD001D66CC /* Bluetooth.swift */,
@@ -91,6 +123,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B6436FED264D555A00BB28FA /* MqttManager */ = {
+			isa = PBXGroup;
+			children = (
+				B6436FEE264D555A00BB28FA /* MqttManagerDelegate.swift */,
+				B6436FEF264D555A00BB28FA /* MulticastDelegate.swift */,
+				B6436FF0264D555A00BB28FA /* MqttManager.swift */,
+			);
+			name = MqttManager;
+			path = "../../../../Desktop/综合课程设计/备份/Home-X/Home-X/MqttManager/SmartThing/MqttManager";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6409E6825CEA69A00B257EC /* Build configuration list for PBXNativeTarget "SmartStroller" */;
 			buildPhases = (
+				A4C9F613EAE38DD629EEBD8E /* [CP] Check Pods Manifest.lock */,
 				B6409E5525CEA69700B257EC /* Sources */,
 				B6409E5625CEA69700B257EC /* Frameworks */,
 				B6409E5725CEA69700B257EC /* Resources */,
+				6D0296C6298DC1A2242A768B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +208,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6D0296C6298DC1A2242A768B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartStroller/Pods-SmartStroller-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartStroller/Pods-SmartStroller-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmartStroller/Pods-SmartStroller-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4C9F613EAE38DD629EEBD8E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartStroller-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B6409E5525CEA69700B257EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -174,8 +261,11 @@
 				B6DFC6CD25D126CD001D66CC /* Bluetooth.swift in Sources */,
 				B65A465025E698F400C94F35 /* ChartTest.swift in Sources */,
 				B6409E5D25CEA69700B257EC /* SmartStrollerApp.swift in Sources */,
+				B6436FF1264D555A00BB28FA /* MqttManagerDelegate.swift in Sources */,
+				B6436FF2264D555A00BB28FA /* MulticastDelegate.swift in Sources */,
 				B6409E6E25CEA90800B257EC /* ControllerView.swift in Sources */,
 				B627BD0925D03E3C00E0B4DC /* MonitorView.swift in Sources */,
+				B6436FF3264D555A00BB28FA /* MqttManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +275,7 @@
 		B6409E6625CEA69A00B257EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -246,7 +336,7 @@
 		B6409E6725CEA69A00B257EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -300,7 +390,9 @@
 		};
 		B6409E6925CEA69A00B257EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2404ADFC9AF53A5F59482A8A /* Pods-SmartStroller.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -324,7 +416,9 @@
 		};
 		B6409E6A25CEA69A00B257EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2A3E01A4CDD6496935C6411 /* Pods-SmartStroller.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
