@@ -83,7 +83,7 @@ struct ControllerView: View {
                     mqttManager.connect(host: "183.230.40.39", port: 6002, username: "326628", password: "13281015932", cleanSession: true)
 
                     
-               
+                   
                     
                     
                     
@@ -138,6 +138,12 @@ struct ControllerView: View {
                     .resizable()
                     .onTapGesture {
                         mqttManager.publish(message: "SmartStrollerData", topic: "sss")
+                        
+      
+                        mqttManager.publish(message: "fdbsetbsrb", topic: "dp")
+                        
+                        
+                        
                     }
                     .scaledToFill()
                     .frame(width: 375, height: 100, alignment: .center)

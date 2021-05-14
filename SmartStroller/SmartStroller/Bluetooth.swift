@@ -327,7 +327,14 @@ class Bluetooth: NSObject, CBCentralManagerDelegate,CBPeripheralDelegate,Observa
             
         }
         
-//        mqttManager.publish(message: "SmartStrollerData", topic: "sss")
+        
+        
+        var JSON = "{\"pressure\":\(DataStore.sensorData[0]),\"pressureTemp\":\(DataStore.sensorData[1]),\"ambientTemp\":\(DataStore.sensorData[2]),\"objectTemp\":\(DataStore.sensorData[3]),\"airQuality\":\(DataStore.sensorData[4]),\"sound\":\(DataStore.sensorData[5]),\"longitude\":\(DataStore.sensorData[6]),\"attitude\":\(DataStore.sensorData[7]),\"altitude\":\(DataStore.sensorData[8]),\"speed\":\(DataStore.sensorData[9]),\"satellites\":\(DataStore.sensorData[10]),\"humidity\":\(DataStore.sensorData[11]),\"distance\":\(DataStore.sensorData[12])}"
+        
+        //0压力值，1压力温度，2环境温度，3物体温度，4空气质量，
+        //5声音,6经度，7纬度，8卫星海拔，9速度，10卫星数,11空气湿度,12距离
+        
+        mqttManager.publish(message: JSON, topic: "strollerData")
         //...more sensor data
         
     }
